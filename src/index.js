@@ -1,6 +1,10 @@
 const express = require("express");
-const app = express();
 const morgan = require("morgan");
+const path = require("path");
+
+const app = express();
+
+const { mongoose } = require("./database");
 
 //?   Settings
 app.set("port", process.env.PORT || 3050);
@@ -16,6 +20,7 @@ app.get("/login", (req, res) => {
 });
 
 //?   Static files
+app.use(express.static(path.join(__dirname, "public")));
 
 //?   Server listening
 app.listen(app.get("port"), () => {
